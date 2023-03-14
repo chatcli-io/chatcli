@@ -20,7 +20,7 @@ config_arg = args.set_config
 
 def generate_response(prompt, config: Config):
     completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo", 
+        model=config.openai_model, 
         messages=[{"role": "user", "content": f"{config.pre_injection} {prompt} \n {config.post_injection}"}]
     )
 

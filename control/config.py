@@ -8,9 +8,11 @@ from control.env import Env
 
 class Config():
     def __init__(self, env: Env):
+        self.default_openai_model = "gpt-3.5-turbo"
         self.default_pre_injection = "Just respond with the command used in bash or zsh that matches the following description: "
         self.default_post_injection = "If this description does not make sense as a command, reply with 'Can't generate a command from that.'"
         self.openai_api_key = env.openai_api_key
+        self.openai_model = env.openai_model
         self.pre_injection = env.pre_injection
         self.post_injection = env.post_injection
         self.set_config_path(env)
@@ -33,11 +35,14 @@ class Config():
 
     def override_config(self):
         openai_api_key = input(f'Your OpenAI token. Enter to keep the current one. \nThe current one starts with: "{self.openai_api_key[:15]}" \n> ')
+        openai_model = input(f'The OpenAI model to use. Enter to keep the current one. \nThe current one is: "{self.openai_model}" \n> ')
         pre_injection = input(f'Type your pre-injection string. Enter to keep the current one. \nThe current one is: "{self.pre_injection}" \n> ')
         post_injection = input(f'Type your post-injection string. Enter to keep the current one. \nThe current one is: "{self.post_injection}" \n> ')
 
         if openai_api_key == "":
             openai_api_key = self.openai_api_key
+        if openai_model == "":
+            openai_model = self.openai_model
         if pre_injection == "":
             pre_injection = self.pre_injection
         if post_injection == "":    
@@ -45,6 +50,7 @@ class Config():
 
         config = {
             "openai_api_key": openai_api_key,
+            "openai_model": openai_model,
             "pre_injection": pre_injection,
             "post_injection": post_injection
         }
@@ -56,9 +62,12 @@ class Config():
         config_dir = os.path.dirname(self.config_path)
 
         openai_api_key = input("Your OpenAI token: ")
+        openai_model = input("The OpenAI model to use: ")
         pre_injection = input(f'''Type your pre-injection string. Enter for the default. \nThe default is: "{self.default_pre_injection}" \n> ''')
         post_injection = input(f'''Type your post-injection string. Enter for the default \nThe default is: "{self.default_post_injection}" \n> ''')
 
+        if openai_model == "":
+            openai_model = self.default_openai_model
         if pre_injection == "":
             pre_injection = self.default_pre_injection
         if post_injection == "":    
@@ -66,6 +75,7 @@ class Config():
 
         config = {
             "openai_api_key": openai_api_key,
+            "openai_model": openai_model,
             "pre_injection": pre_injection,
             "post_injection": post_injection
         }
@@ -79,12 +89,17 @@ class Config():
             with open(self.config_path, "r") as config:
                 data = load(config, Loader=Loader)
                 self.openai_api_key = data["openai_api_key"]
+                self.openai_model = data["openai_model"]
                 self.pre_injection = data["pre_injection"]
                 self.post_injection = data["post_injection"]
         except FileNotFoundError:
             if not self.openai_api_key is None:
                 return
             print("no config found.")
+            print("run: $ chatcli --set-config")
+            exit(0)
+        except Exception:
+            print("config may not be complete or faulty.")
             print("run: $ chatcli --set-config")
             exit(0)
 
