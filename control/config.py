@@ -88,10 +88,10 @@ class Config():
         try: 
             with open(self.config_path, "r") as config:
                 data = load(config, Loader=Loader)
-                self.openai_api_key = data["openai_api_key"]
-                self.openai_model = data["openai_model"]
-                self.pre_injection = data["pre_injection"]
-                self.post_injection = data["post_injection"]
+                self.openai_api_key = data.get("openai_api_key")
+                self.openai_model = data.get("openai_model")
+                self.pre_injection = data.get("pre_injection")
+                self.post_injection = data.get("post_injection")
         except FileNotFoundError:
             if not self.openai_api_key is None:
                 return
