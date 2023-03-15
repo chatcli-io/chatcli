@@ -7,7 +7,7 @@ except ImportError:
 from control.env import Env
 
 class Config():
-    def __init__(self, env: Env):
+    def __init__(self, env: Env, set_config=False):
         self.default_openai_model = "gpt-3.5-turbo"
         self.default_pre_injection = "Just respond with the command used in bash or zsh that matches the following description: "
         self.default_post_injection = "If this description does not make sense as a command, reply with 'Can't generate a command from that.'"
@@ -16,6 +16,8 @@ class Config():
         self.pre_injection = env.pre_injection
         self.post_injection = env.post_injection
         self.set_config_path(env)
+        if set_config:
+            self.set_config()
         self.load_config()
         self.consolidate_injections()
 
@@ -80,12 +82,12 @@ class Config():
             "post_injection": post_injection
         }
 
-        os.makedirs(config_dir)
+        os.makedirs(config_dir, exist_ok=True)
         with open(self.config_path, "w") as config_file:
             dump(config, config_file, Dumper=Dumper)
 
     def load_config(self):
-        try: 
+        try:
             with open(self.config_path, "r") as config:
                 data = load(config, Loader=Loader)
                 self.openai_api_key = data.get("openai_api_key")
