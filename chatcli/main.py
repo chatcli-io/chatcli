@@ -14,9 +14,9 @@ def generate_response(prompt, config: Config):
     return completion
 
 def run():
-    parser = argparse.ArgumentParser(description='Send a prompt to ChatGPT and receive a response')
+    parser = argparse.ArgumentParser(description='Send a prompt to ChatGPT and receive a response, that respects you pre- and post-injection')
     parser.add_argument('prompt', type=str, nargs="?", default=None, help='Text prompt to send to ChatGPT')
-    parser.add_argument('--set-config', required=False, action='store_true', help='Text prompt to send to ChatGPT')
+    parser.add_argument('--set-config', required=False, action='store_true', help='Configure the tool.')
     args = parser.parse_args()
 
     prompt = args.prompt
