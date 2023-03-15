@@ -9,7 +9,7 @@ from control.env import Env
 class Config():
     def __init__(self, env: Env, set_config=False):
         self.default_openai_model = "gpt-3.5-turbo"
-        self.default_pre_injection = "Just respond with the command used in bash or zsh that matches the following description: "
+        self.default_pre_injection = "Just respond with a command that can be used in a bash based terminal and achieves a result that matches the following description: "
         self.default_post_injection = "If this description does not make sense as a command, reply with 'Can't generate a command from that.'"
         self.openai_api_key = env.openai_api_key
         self.openai_model = env.openai_model
@@ -64,9 +64,9 @@ class Config():
         config_dir = os.path.dirname(self.config_path)
 
         openai_api_key = input("Your OpenAI token: ")
-        openai_model = input("The OpenAI model to use: ")
-        pre_injection = input(f'''Type your pre-injection string. Enter for the default. \nThe default is: "{self.default_pre_injection}" \n> ''')
-        post_injection = input(f'''Type your post-injection string. Enter for the default \nThe default is: "{self.default_post_injection}" \n> ''')
+        openai_model = input(f'The OpenAI model to use: \nThe default is: "{self.default_openai_model}" \n> ')
+        pre_injection = input(f'Type your pre-injection string. Enter for the default. \nThe default is: "{self.default_pre_injection}" \n> ')
+        post_injection = input(f'Type your post-injection string. Enter for the default \nThe default is: "{self.default_post_injection}" \n> ')
 
         if openai_model == "":
             openai_model = self.default_openai_model
