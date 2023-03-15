@@ -30,9 +30,9 @@ dependencies = [
 
 [project.urls]
 homepage = "chatcli.io"
-documentation = "https://readthedocs.org"
-repository = "https://github.com/deeliciouscode/chatcli"
-changelog = "https://github.com/deeliciouscode/chatcli/main/CHANGELOG.md"
+documentation = "https://github.com/chatcli-io/chatcli/blob/main/README.md"
+repository = "https://github.com/chatcli-io/chatcli"
+changelog = "https://github.com/chatcli-io/chatcli/blob/main/CHANGELOG.md"
 
 [project.scripts]
 chatcli = "chatcli.main:run"
