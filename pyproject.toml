@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chatcli"
+version = "0.0.1"
+description = "A cli wrapper around chatgpt, to get tips and hints from the terminal."
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "Beerware"}
+keywords = ["openai", "llm", "chatgpt", "cli"]
+authors = [
+  {email = "schmiderdavid@gmail.com"},
+  {name = "David Schmider"}
+]
+maintainers = [
+  {name = "David Schmider", email = "schmiderdavid@gmail.com"}
+]
+classifiers = [
+  "Programming Language :: Python :: 3.10.9",
+  "Operating System :: Unix",
+  "Development Status :: 4 - Beta",
+]
+
+dependencies = [
+  "openai == 0.27.2",
+  "PyYAML == 6.0",
+]
+
+[project.urls]
+homepage = "chatcli.io"
+documentation = "https://readthedocs.org"
+repository = "https://github.com/deeliciouscode/chatcli"
+changelog = "https://github.com/deeliciouscode/chatcli/main/CHANGELOG.md"
+
+[project.scripts]
+chatcli = "chatcli.main:run"
