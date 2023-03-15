@@ -3,7 +3,7 @@ A Project to help with cli commands.
 
 # Ideas
 - Allow conversation
-- more flags for customization
+- More flags for customization
 - Allow config file to customize pre and post prompt [x]
 
 # Install
@@ -11,6 +11,7 @@ I will potentially make this installable via a package manager at some point, bu
 this is the easiest.
 
 ```
+$ pip install -r requirements
 $ ./install.sh
 ```
 
