@@ -4,7 +4,7 @@ try:
     from yaml import CLoader as Loader, CDumper as Dumper
 except ImportError:
     from yaml import Loader, Dumper
-from control.env import Env
+from chatcli.control.env import Env
 
 class Config():
     def __init__(self, env: Env, set_config=False):

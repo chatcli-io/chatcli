@@ -2,8 +2,8 @@
 
 import argparse
 import openai
-from control.env import Env
-from control.config import Config
+from chatcli.control.env import Env
+from chatcli.control.config import Config
 
 def generate_response(prompt, config: Config):
     completion = openai.ChatCompletion.create(
