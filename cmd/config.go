@@ -104,7 +104,7 @@ var configCmd = &cobra.Command{
 		_, err = os.Stat(configDirPath)
 		if os.IsNotExist(err) {
 			// Create the directory if it doesn't exist yet
-			errDir := os.MkdirAll(configDirPath, 0755)
+			errDir := os.MkdirAll(configDirPath, 0777)
 			if errDir != nil {
 				fmt.Printf("Error creating directory: %v\n", err)
 				os.Exit(1)
