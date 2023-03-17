@@ -2,6 +2,7 @@
 A Project to help with cli commands.
 
 # Ideas
+- move to GoLang [x]
 - Allow config file to customize pre and post prompt [x]
 - Allow conversation, to refer back to last output 
 - More flags for customization
@@ -11,15 +12,15 @@ A Project to help with cli commands.
 # Install
 It's not in any registry yet so you need to clone this repo and then run
 ```
-$ pip install .
+$ go build && sudo cp chatcli /usr/local/bin/chatcli
 ```
 
 # Config
 ```
-$ chatcli --set-config
+$ chatcli config
 ```
 
 # Usage
 ```
-$ chatcli "Copy a file from a remote server to my machine"
+$ chatcli gen "Copy a file from a remote server to my machine"
 ```
