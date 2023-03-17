@@ -53,6 +53,12 @@ Example usage: chatcli generate "Find a file with a specific name"`,
 			os.Exit(1)
 		}
 
+		if cfg.OpenAIKey == "" {
+			fmt.Println("Can't send any requests without API token run:")
+			fmt.Println("$ chatcli config")
+			os.Exit(1)
+		}
+
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Authorization", "Bearer "+cfg.OpenAIKey)
 
