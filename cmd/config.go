@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -95,6 +96,19 @@ var configCmd = &cobra.Command{
 		if err != nil {
 			fmt.Printf("Error marshalling config: %v\n", err)
 			os.Exit(1)
+		}
+
+		configDirPath := path.Dir(defaultCfg.ConfigPath)
+
+		// Check if the directory exists
+		_, err = os.Stat(configDirPath)
+		if os.IsNotExist(err) {
+			// Create the directory if it doesn't exist yet
+			errDir := os.MkdirAll(configDirPath, 0755)
+			if errDir != nil {
+				fmt.Printf("Error creating directory: %v\n", err)
+				os.Exit(1)
+			}
 		}
 
 		if err = ioutil.WriteFile(defaultCfg.ConfigPath, data, 0644); err != nil {
